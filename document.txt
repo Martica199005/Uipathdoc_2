@@ -1,10 +1,18 @@
-/home/runner/Uipathdoc/main.py
+				/home/runner/Uipathdoc/Main.xaml
 
-****************
-/home/runner/Uipathdoc/.upm/store.json
+The workflow type is Main.xaml
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Main.xaml
+Invoke workflow: Invoke Read Excel workflow
+Invoke workflow: Invoke 6Sicuro workflow
+********************************
+				/home/runner/Uipathdoc/document.txt
+
+***********************************
+				/home/runner/Uipathdoc/main.py
+******************************
+					/home/runner/Uipathdoc/.upm/store.json
+**************************************
+					/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Main.xaml
 
 The workflow type is Main.xaml
 
@@ -23,10 +31,13 @@ Annotation: Retrieve a new transaction data to be processed.&#xA;The Transaction
 Display Name: Retrieve Data
 Type Sequence_25
 
+Invoke workflow: Invoke GetTransactionData workflow
 Annotation: __ReferenceID2
 Display Name: Process a single transaction. &#xA;The result of the processing can be: 1) Success, 2) Business Exception, 3) System Exception. &#xA;In the case of a system exception, the transaction can be automatically retried.
 Type State_3
 
+Invoke workflow: Invoke Process workflow
+Invoke workflow: Invoke SetTransactionStatus workflow
 Annotation: __ReferenceID3
 Display Name: Read configuration file and initialize applications used in the process.
 Type State_2
@@ -35,6 +46,7 @@ Annotation: An uninitialized Config dictionary indicates that it is the first ru
 Display Name: [Config is Nothing]
 Type If_1
 
+Invoke workflow: Invoke InitAllSettings workflow
 Annotation: Overwrite queue name from in configuration file in case the argument in_OrchestratorQueueName is specified.&#xA;This provides backward compatibility with &lt; 2018.3.
 Display Name: [Not String.IsNullOrWhiteSpace(in_OrchestratorQueueName)]
 Type If_10
@@ -43,10 +55,12 @@ Annotation: {x:Null}
 Display Name: Kills all Windows processes representing applications used in this business process to assure that the execution starts in a clean state.&#xA;Since the applications are assumed to be already closed, CloseAllApplications is skipped and just KillAllProcess is invoked.
 Type Framework\KillAllProcesses.xaml
 
+Invoke workflow: Kills all Windows processes representing applications used in this business process to assure that the execution starts in a clean state.&#xA;Since the applications are assumed to be already closed, CloseAllApplications is skipped and just KillAllProcess is invoked.
 Annotation: Add the process name to the logs generated after this point. &#xA;This log field can be used to create reports and visualizations about the process.
 Display Name: Add Log Fields (BusinessProcessName)
 Type AddLogFields_2
 
+Invoke workflow: Invoke InitiAllApplications workflow
 Annotation: Failures during the initialization are considered system exceptions and lead to the End Process state, thus finalizing the execution.
 Display Name: Assign SystemException
 Type Assign_21
@@ -55,6 +69,8 @@ Annotation: __ReferenceID1
 Display Name: End process and close all applications used.
 Type True
 
+Invoke workflow: Invoke CloseAllApplications workflow
+Invoke workflow: Invoke KillAllProcesses workflow (End process)
 Annotation: Business Rule Exception
 Display Name: Business Exception
 Type Transition_1
@@ -97,8 +113,8 @@ Type TransactionID
 Annotation: sd:DataTable
 Type TransactionData
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Process.xaml
+*****************************************************************
+					/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Process.xaml
 
 The workflow type is Process.xaml
 
@@ -112,74 +128,55 @@ Annotation: Invoke major steps of the business process, which are usually implem
 Display Name: Process
 Type Sequence_1
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/project.json
+********************************************************************
+					/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/project.json
+********************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/AllDependencies.json
+***********************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/nuget.cache
+**************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/PackageCache.json
+********************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/ProjectSettings.json
+***********************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/RoboticEnterpriseFramework_prova.nuget.props
+***********************************************************************************************************
+							/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/db/references.db
+*******************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.objects/.metadata
+**************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.objects/.type
+**********************************************************************
+							/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Debug/settings-1a5b880a.json
+**********************************************************************************************
+							/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Debug/settings-5190454b.json
+**********************************************************************************************
+							/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Debug/settings-590bb27b.json
+**********************************************************************************************
+							/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Debug/settings-9e9290da.json
+**********************************************************************************************
+							/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Release/settings-1a5b880a.json
+************************************************************************************************
+							/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Release/settings-5190454b.json
+************************************************************************************************
+							/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Release/settings-590bb27b.json
+************************************************************************************************
+							/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Release/settings-9e9290da.json
+************************************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Data/Config.xlsx
+************************************************************************
+							/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Data/Input/placeholder.txt
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/AllDependencies.json
+**********************************************************************************
+							/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Data/Temp/placeholder.txt
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/nuget.cache
+*********************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Documentation/REFramework Documentation-EN.pdf
+******************************************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Exceptions_Screenshots/placeholder.txt
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/PackageCache.json
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/ProjectSettings.json
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/RoboticEnterpriseFramework_prova.nuget.props
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/db/references.db
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.objects/.metadata
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.objects/.type
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Debug/settings-1a5b880a.json
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Debug/settings-5190454b.json
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Debug/settings-590bb27b.json
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Debug/settings-9e9290da.json
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Release/settings-1a5b880a.json
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Release/settings-5190454b.json
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Release/settings-590bb27b.json
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Release/settings-9e9290da.json
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Data/Config.xlsx
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Data/Input/placeholder.txt
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Data/Temp/placeholder.txt
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Documentation/REFramework Documentation-EN.pdf
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Exceptions_Screenshots/placeholder.txt
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/CloseAllApplications.xaml
+**********************************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/CloseAllApplications.xaml
 
 The workflow type is CloseAllApplications.xaml
 
@@ -187,8 +184,8 @@ Annotation: Do the necessary procedures for ending the process (e.g., logout) an
 Display Name: Close All Applications
 Type Sequence_2
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/GetTransactionData.xaml
+*******************************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/GetTransactionData.xaml
 
 The workflow type is GetTransactionData.xaml
 
@@ -229,8 +226,8 @@ Annotation: Write data to the added log fields that identify the transaction.
 Display Name: Add transaction information to log fields
 Type Sequence_3
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/InitAllApplications.xaml
+*****************************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/InitAllApplications.xaml
 
 The workflow type is Initialize_Applications.xaml
 
@@ -241,8 +238,8 @@ Annotation: Open applications used in the process and do necessary initializatio
 Display Name: Initialize All Applications
 Type Sequence_9
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/InitAllSettings.xaml
+******************************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/InitAllSettings.xaml
 
 The workflow type is InitiAllSettings.xaml
 
@@ -275,8 +272,8 @@ Annotation: Logs a warn message in case the asset is specified in the Config fil
 Display Name: [Not String.IsNullOrWhiteSpace(Row(&quot;Name&quot;).ToString.Trim)]
 Type If_5
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/KillAllProcesses.xaml
+**************************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/KillAllProcesses.xaml
 
 The workflow type is KillAllProcesses.xaml
 
@@ -284,8 +281,8 @@ Annotation: Use the Kill Process activity to force the termination of the Window
 Display Name: Kill All Processes
 Type Sequence_2
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/RetryCurrentTransaction.xaml
+***************************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/RetryCurrentTransaction.xaml
 
 The workflow type is RetryCurrentTransaction.xaml
 
@@ -308,8 +305,8 @@ Annotation: Manage the retrying mechanism for the framework and it is invoked in
 Display Name: Retry Current Transaction
 Type Flowchart_7
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/SetTransactionStatus.xaml
+**********************************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/SetTransactionStatus.xaml
 
 The workflow type is SetTransactionStatus.xaml
 
@@ -372,16 +369,20 @@ Annotation: If a system exception occurs during the process, the transaction ite
 Display Name: System Exception
 Type Sequence_5
 
+Invoke workflow: Invoke RetryCurrentTransaction workflow
 Annotation: Take a screenshot of the current state of the screen to facilitate debugging.
 Display Name: Try taking screenshot
 Type TryCatch_4
 
+Invoke workflow: Invoke TakeScreenshot workflow
 Annotation: Close all applications before returning to the Initialization state and opening them again.&#xA;If applications cannot be closed, kill their respective processes.
 Display Name: Try closing applications
 Type TryCatch_6
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/TakeScreenshot.xaml
+Invoke workflow: Invoke CloseAllApplications workflow
+Invoke workflow: Invoke KillAllProcesses workflow
+*******************************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/TakeScreenshot.xaml
 
 The workflow type is TakeScreenshot.xaml
 
@@ -399,8 +400,8 @@ Annotation: {x:Null}
 Display Name: The whole screen is captured.
 Type [Screenshot]
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Tests/RunAllTests.xaml
+*************************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Tests/RunAllTests.xaml
 
 The workflow type is RunAllTests.xaml
 
@@ -418,12 +419,16 @@ Annotation: Execute test and log its result.
 Display Name: Try catch
 Type TryCatch_2
 
+Invoke workflow: Invoke Test File
+Invoke workflow: Invoke RunAllTests_Logging workflow (Success)
+Invoke workflow: Invoke RunAllTests_Loggingg (System Exception)
+Invoke workflow: Invoke RunAllTests_Logging (Business Exception)
 Annotation: {x:Null}
 Display Name: {x:Null}
 Type &lt;wnd app='notepad.exe' cls='Notepad' title='TestLog.txt - Notepad' /&gt;
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Tests/RunAllTests_Logging.xaml
+******************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Tests/RunAllTests_Logging.xaml
 
 The workflow type is RunAllTests_Logging.xaml
 
@@ -461,14 +466,13 @@ Annotation: Log the result of running the test, based on the type of test and it
 Display Name: Run All Tests - Logging
 Type Sequence_3
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Tests/TestLog.txt
+**************************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Tests/TestLog.txt
 
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Tests/Tests.xlsx
-
-****************
-/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Tests/TestWorkflowTemplate.xaml
+*************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Tests/Tests.xlsx
+************************************************************************
+						/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Tests/TestWorkflowTemplate.xaml
 
 The workflow type is TestWorkflowTemplate.xaml
 
@@ -479,4 +483,5 @@ Type Sequence_1
 Annotation: scg:Dictionary(x:String, x:Object)
 Type Config
 
-****************
+Invoke workflow: Invoke InitAllSettings workflow
+***************************************************************************************

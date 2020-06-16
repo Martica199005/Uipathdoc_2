@@ -1,10 +1,13 @@
 import os
 import pathlib
 import sys
+import math
 
 
 from os import listdir
 from os.path import isfile, join
+
+
 
 def display_annotations(path):
   with open(path,'r') as f:
@@ -21,7 +24,46 @@ def display_annotations(path):
           stringa=line.split('"')
           print('Display Name: {}'.format(stringa[3]))
         print("Type {}\n".format(stringa[l-2]))
+      if 'InvokeWorkflowFile' in line:
+        stringa=line.split('"')
+        if len(stringa)>1:
+          print('Invoke workflow: {}'.format(stringa[3]))
   return None
+
+
+def bool_search(path):
+  list=[]
+  with open(path,'r') as f:
+    tag = input("Enter attribute to search\n ")
+    list.append(tag)
+    if tag in f.read():
+      founded=True
+    else:
+      founded=False
+      print('Not present')
+    list.append(founded)
+  return list
+
+
+
+#Search for a tag/attribute
+def search_attribute(path,result):
+  if result[1]==True:
+    with open(path,'r') as f:
+      tag=result[0]
+      #tag = input("Enter attribute to search\n ")
+      for line in f:
+        if tag in line:
+            print("{} is in {}".format(tag,line))
+
+          
+#Show only subdirectories       
+def display_only_subdir(path):
+  dirs=[]
+  for entry in os.listdir(path):
+    if os.path.isdir(os.path.join(path, entry)):
+      dirs.append(entry)
+  return dirs
 
 
 
@@ -42,6 +84,23 @@ def getListOfFiles(dirName):
                 
     return allFiles  
 
+def print_list(list):
+  if list:
+    listOfFiles=list
+    for elem in listOfFiles:
+      if not ".git" in elem:
+        count=elem.count('/')
+        if count>1:
+          space=count*"\t"
+          identation=space+str(elem)
+          print(identation)
+        if elem.endswith(".txt") or elem.endswith(".xaml"):
+          print("")
+          #result=bool_search(elem)
+          #search_attribute(elem,result)
+          display_annotations(elem)
+        print ("*"*len(str(elem))) 
+
 #Gives current directory
 basepath=os.getcwd()
 print("Path: "+basepath)
@@ -56,15 +115,21 @@ listOfFiles = list()
 for (dirpath, dirnames, filenames) in os.walk(dirName):
     listOfFiles += [os.path.join(dirpath, file) for file in filenames]
     
-
-
+    
 # Print the files 
 for elem in listOfFiles:
-  print(elem)  
-  print("")
-  if elem.endswith(".txt") or elem.endswith(".xaml"):
-    display_annotations(elem)
-  print ("****************") 
+  if not ".git" in elem:
+    count=elem.count('/')
+    if count>1:
+      space=(count)*"\t"
+      identation=space+str(elem)
+      print(identation)
+    if elem.endswith(".txt") or elem.endswith(".xaml"):
+      print("")
+      #result=bool_search(elem)
+      #search_attribute(elem,result)
+      #display_annotations(elem)
+    print ("*"*len(str(elem))) 
 
 
 # Save a reference to the original standard output  
@@ -72,21 +137,16 @@ original_stdout = sys.stdout
 
 #Write the result in document.txt
 with open('document.txt', 'w') as f:
-  sys.stdout = f # Change the standard output to the file we created.
-  #print('This message will be written to a file.')
-  for elem in listOfFiles:
-    print(elem)  
-    print("")
-    if elem.endswith(".txt") or elem.endswith(".xaml"):
-      display_annotations(elem)
-    print ("****************")
+  # Change the standard output to the file we created.
+  sys.stdout = f 
+  print_list(listOfFiles)
   sys.stdout = original_stdout # Reset the standard output to its original value
 
 
 
 
-    
-    
+  
+#identation for subdirectories: count number of /
 
   
   
