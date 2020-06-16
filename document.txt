@@ -1,0 +1,482 @@
+/home/runner/Uipathdoc/main.py
+
+****************
+/home/runner/Uipathdoc/.upm/store.json
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Main.xaml
+
+The workflow type is Main.xaml
+
+Annotation: Allows the Orchestrator queue name to be passed as an argument, instead of only being defined in the configuration file.
+Type InArgument(x:String)
+
+Annotation: {x:Reference __ReferenceID3}
+Display Name: [Process title]&#xA;[Process description]&#xA;[Additional information (e.g., author, contact information and applications involved and required external setup)]
+Type StateMachine_1
+
+Annotation: __ReferenceID0
+Display Name: Get the next transaction to be processed.
+Type State_4
+
+Annotation: Retrieve a new transaction data to be processed.&#xA;The TransactionNumber variable holds the current transaction number and incrementing this variable makes the framework retrieve the next transaction. If the framework is retrying a failed transaction, this variable is not incremented until the maximum number of retry attempts is reached.
+Display Name: Retrieve Data
+Type Sequence_25
+
+Annotation: __ReferenceID2
+Display Name: Process a single transaction. &#xA;The result of the processing can be: 1) Success, 2) Business Exception, 3) System Exception. &#xA;In the case of a system exception, the transaction can be automatically retried.
+Type State_3
+
+Annotation: __ReferenceID3
+Display Name: Read configuration file and initialize applications used in the process.
+Type State_2
+
+Annotation: An uninitialized Config dictionary indicates that it is the first run of the process.
+Display Name: [Config is Nothing]
+Type If_1
+
+Annotation: Overwrite queue name from in configuration file in case the argument in_OrchestratorQueueName is specified.&#xA;This provides backward compatibility with &lt; 2018.3.
+Display Name: [Not String.IsNullOrWhiteSpace(in_OrchestratorQueueName)]
+Type If_10
+
+Annotation: {x:Null}
+Display Name: Kills all Windows processes representing applications used in this business process to assure that the execution starts in a clean state.&#xA;Since the applications are assumed to be already closed, CloseAllApplications is skipped and just KillAllProcess is invoked.
+Type Framework\KillAllProcesses.xaml
+
+Annotation: Add the process name to the logs generated after this point. &#xA;This log field can be used to create reports and visualizations about the process.
+Display Name: Add Log Fields (BusinessProcessName)
+Type AddLogFields_2
+
+Annotation: Failures during the initialization are considered system exceptions and lead to the End Process state, thus finalizing the execution.
+Display Name: Assign SystemException
+Type Assign_21
+
+Annotation: __ReferenceID1
+Display Name: End process and close all applications used.
+Type True
+
+Annotation: Business Rule Exception
+Display Name: Business Exception
+Type Transition_1
+
+Annotation: There is no need for any action in case of successful transaction.&#xA;The process should simply go to next transaction.
+Display Name: Success
+Type Transition_5
+
+Annotation: This is a simple mecanism to stop the process.&#xA;In reallife scenario you can stop the process when there is no more data to process or on a schedule.
+Display Name: No Data
+Type Transition_7
+
+Annotation: ui:QueueItem
+Type TransactionItem
+
+Annotation: s:Exception
+Type SystemException
+
+Annotation: ui:BusinessRuleException
+Type BusinessException
+
+Annotation: x:Int32
+Type TransactionNumber
+
+Annotation: scg:Dictionary(x:String, x:Object)
+Type Config
+
+Annotation: x:Int32
+Type RetryNumber
+
+Annotation: x:String
+Type TransactionField2
+
+Annotation: x:String
+Type TransactionField1
+
+Annotation: x:String
+Type TransactionID
+
+Annotation: sd:DataTable
+Type TransactionData
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Process.xaml
+
+The workflow type is Process.xaml
+
+Annotation: Transaction item to be processed.
+Type InArgument(ui:QueueItem)
+
+Annotation: Dictionary structure to store configuration data of the process (settings, constants and assets).
+Type InArgument(scg:Dictionary(x:String, x:Object))
+
+Annotation: Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. 
+Display Name: Process
+Type Sequence_1
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/project.json
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/AllDependencies.json
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/nuget.cache
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/PackageCache.json
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/ProjectSettings.json
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/RoboticEnterpriseFramework_prova.nuget.props
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.local/db/references.db
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.objects/.metadata
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.objects/.type
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Debug/settings-1a5b880a.json
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Debug/settings-5190454b.json
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Debug/settings-590bb27b.json
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Debug/settings-9e9290da.json
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Release/settings-1a5b880a.json
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Release/settings-5190454b.json
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Release/settings-590bb27b.json
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/.settings/Release/settings-9e9290da.json
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Data/Config.xlsx
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Data/Input/placeholder.txt
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Data/Temp/placeholder.txt
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Documentation/REFramework Documentation-EN.pdf
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Exceptions_Screenshots/placeholder.txt
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/CloseAllApplications.xaml
+
+The workflow type is CloseAllApplications.xaml
+
+Annotation: Do the necessary procedures for ending the process (e.g., logout) and close the used applications.
+Display Name: Close All Applications
+Type Sequence_2
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/GetTransactionData.xaml
+
+The workflow type is GetTransactionData.xaml
+
+Annotation: Sequential counter of transaction items.
+Type InArgument(x:Int32)
+
+Annotation: Dictionary structure to store configuration data of the process (settings, constants and assets).
+Type InArgument(scg:Dictionary(x:String, x:Object))
+
+Annotation: Transaction item to be processed.
+Type OutArgument(ui:QueueItem)
+
+Annotation: Allow the optional addition of information about the transaction item.
+Type OutArgument(x:String)
+
+Annotation: Allow the optional addition of information about the transaction item.
+Type OutArgument(x:String)
+
+Annotation: Transaction ID used for information and logging purposes. Ideally, the ID should be unique for each transaction. 
+Type OutArgument(x:String)
+
+Annotation: This variable can be used in case transactions are stored in a DataTable (for example, after being retrieved from a spreadsheet).
+Type InOutArgument(sd:DataTable)
+
+Annotation: Get a transaction item from a specified source (e.g., Orchestrator queues, spreadsheets, databases, mailboxes or web APIs). &#xA;&#xA;If there are no transaction items remaining, out_TransactionItem is set to Nothing, which leads to the End Process state. &#xA;&#xA;For cases in which there is only a single transaction (i.e., a linear process), use an If activity to check whether the argument in_TransactionNumber has the value 1 (meaning it is the first and only transaction) and assign the transaction item to out_TransactionItem. For any other value of in_TransactionNumber, out_TransactionItem should be set to Nothing.&#xA;&#xA;If there are multiple transactions, use the argument in_TransactionNumber as an index to retrieve the correct transaction to be processed. If there are no more transactions left, it is necessary to set out_TransactionItem to Nothing, thus ending the process.
+Display Name: Get Transaction Data
+Type Sequence_1
+
+Annotation: {x:Null}
+Display Name: {x:Null}
+Type [out_TransactionItem]
+
+Annotation: This optional step can be used to include more information about a transaction item and it is used mainly for logging and visualization purposes.&#xA;For example, if transaction items are invoices, then out_TransactionID can be the invoice number, out_TransactionField1 can be the invoice date and out_TransactionField2 can be the invoice amount.
+Display Name: [out_TransactionItem isNot Nothing]
+Type If_1
+
+Annotation: Write data to the added log fields that identify the transaction.
+Display Name: Add transaction information to log fields
+Type Sequence_3
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/InitAllApplications.xaml
+
+The workflow type is Initialize_Applications.xaml
+
+Annotation: Dictionary structure to store configuration data of the process (settings, constants and assets).
+Type InArgument(scg:Dictionary(x:String, x:Object))
+
+Annotation: Open applications used in the process and do necessary initialization procedures (e.g., login).
+Display Name: Initialize All Applications
+Type Sequence_9
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/InitAllSettings.xaml
+
+The workflow type is InitiAllSettings.xaml
+
+Annotation: Path to the configuration file that defines settings, constants and assets.
+Type InArgument(x:String)
+
+Annotation: Names of the sheets corresponding to settings and constants in the configuration file.
+Type InArgument(s:String[])
+
+Annotation: Dictionary structure to store configuration data of the process (settings, constants and assets).
+Type OutArgument(scg:Dictionary(x:String, x:Object))
+
+Annotation: Initialize, populate and output a configuration Dictionary to be used throughout the project. &#xA;Settings and constants are read from the local configuration file, and assets are fetched from Orchestrator. &#xA;Asset values overwrite settings and constant values if they are defined with the same name.
+Display Name: Initialize All Settings
+Type Sequence_2
+
+Annotation: Read settings and constants from the configuration file and add them to the Config dictionary.
+Display Name: Get local settings and constants
+Type Sequence_5
+
+Annotation: Read non-empty rows in the sheet.
+Display Name: [Not String.IsNullOrWhiteSpace(row(&quot;Name&quot;).ToString.Trim)]
+Type If_1
+
+Annotation: Get from Orchestrator the values of assets listed in the Assets sheet.
+Display Name: Get Orchestrator assets
+Type Sequence_6
+
+Annotation: Logs a warn message in case the asset is specified in the Config file, but it could not be loaded from Orchestrator.
+Display Name: [Not String.IsNullOrWhiteSpace(Row(&quot;Name&quot;).ToString.Trim)]
+Type If_5
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/KillAllProcesses.xaml
+
+The workflow type is KillAllProcesses.xaml
+
+Annotation: Use the Kill Process activity to force the termination of the Windows processes representing applications used in the business process being automated.&#xA;Note that killing processes might have undesirable outcomes, such as losing unsaved changes to files.
+Display Name: Kill All Processes
+Type Sequence_2
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/RetryCurrentTransaction.xaml
+
+The workflow type is RetryCurrentTransaction.xaml
+
+Annotation: Dictionary structure to store configuration data of the process (settings, constants and assets).
+Type InArgument(scg:Dictionary(x:String, x:Object))
+
+Annotation: Used to control the number of attempts of retrying the transaction processing in case of system exceptions.
+Type InOutArgument(x:Int32)
+
+Annotation: Sequential counter of transaction items.
+Type InOutArgument(x:Int32)
+
+Annotation: Used during transitions between states to represent exceptions other than business exceptions.
+Type InArgument(s:Exception)
+
+Annotation: Used to indicate whether the retry procedure is managed by an Orchestrator queue.
+Type InArgument(x:Boolean)
+
+Annotation: Manage the retrying mechanism for the framework and it is invoked in SetTransactionStatus.xaml when a system exception occurs. &#xD;&#xA;The retrying method is based on the configurations defined in Config.xlsx.
+Display Name: Retry Current Transaction
+Type Flowchart_7
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/SetTransactionStatus.xaml
+
+The workflow type is SetTransactionStatus.xaml
+
+Annotation: Dictionary structure to store configuration data of the process (settings, constants and assets).
+Type InArgument(scg:Dictionary(x:String, x:Object))
+
+Annotation: Transaction item to be processed.
+Type InArgument(ui:QueueItem)
+
+Annotation: Used to control the number of attempts of retrying the transaction processing in case of system exceptions.
+Type InOutArgument(x:Int32)
+
+Annotation: Sequential counter of transaction items.
+Type InOutArgument(x:Int32)
+
+Annotation: Optionally used to include additional information about the transaction item.
+Type InArgument(x:String)
+
+Annotation: Optionally used to include additional information about the transaction item.
+Type InArgument(x:String)
+
+Annotation: Used for information and logging purposes. Ideally, the ID should be unique for each transaction. 
+Type InArgument(x:String)
+
+Annotation: Used during transitions between states to represent exceptions other than business exceptions.
+Type InArgument(s:Exception)
+
+Annotation: Exception variable that is used during transitions between states and represents a situation that does not conform to the rules of the process being automated.
+Type InArgument(ui:BusinessRuleException)
+
+Annotation: Set and log the transaction's status along with extra log fields. &#xA;There can be three possible statuses: Success, Business Exception and System Exception.&#xA;&#xA;Business Rule Exception characterizes an irregular situation according to the process's rules and prevents the transaction to be processed. The transaction is not retried in this case, since the result will be the same until the problem that causes the exception is solved.&#xA;For example, it can be considered a BusinessRuleException if a process expects to read an email's attachment, but the sender didn't attach any file. In this case, immediate retries of the transaction will not yield a different result.&#xA;&#xA;On the other hand, system exceptions are characterized by exceptions whose types are different than BusinessRuleException. When this kind of exception happens, the transaction item can be retried after closing and reopening the applications involved in the process. The rationale behind this is that the exception was caused by a problem in the applications, which might be solved by restarting them.&#xA;&#xA;If Orchestrator queues are the source of transactions, the Set Transaction Status activity is used to update the status. In addition, the retry mechanism is also implemented by Orchestrator.&#xA;&#xA;If Orchestrator queues are not used, the status can be set, for example, by writing to a specific column in a spreadsheet. In such cases, the retry mechanism is covered by the framework and the number of retries is defined in the configuration file.&#xA;&#xA;At the end, io_TransactionNumber is incremented, which makes the framework get the next transaction to be processed.
+Display Name: Set Transaction Status
+Type Flowchart_2
+
+Annotation: If the transaction item is processed without any exception, its status is updated as Successful.
+Display Name: Success
+Type Sequence_6
+
+Annotation: Includes custom log fields to the log message.&#xA;They are removed after logging to prevent duplicated status messages about a single transaction.
+Display Name: Log Success with additional logging fields
+Type Sequence_9
+
+Annotation: Increment the TransactionNumber to get the next transaction to be processed.
+Display Name: Assign io_TransactionNumber
+Type Assign_25
+
+Annotation: Reset the counter of retries to allow the next transaction to be retried the correct amount of times.
+Display Name: Assign io_RetryNumber
+Type Assign_26
+
+Annotation: If a BussinessRuleException is thrown during the process, the transaction item's status is updated as Failed (Exception Type: Business).&#xA;
+Display Name: Business Exception
+Type Sequence_3
+
+Annotation: Includes custom log fields to the log message.&#xA;They are removed after logging to prevent duplicated status messages about a single transaction.
+Display Name: Log business exception with additional logging fields
+Type Sequence_10
+
+Annotation: If a system exception occurs during the process, the transaction item's status is updated as Failed (Exception Type: Application).
+Display Name: System Exception
+Type Sequence_5
+
+Annotation: Take a screenshot of the current state of the screen to facilitate debugging.
+Display Name: Try taking screenshot
+Type TryCatch_4
+
+Annotation: Close all applications before returning to the Initialization state and opening them again.&#xA;If applications cannot be closed, kill their respective processes.
+Display Name: Try closing applications
+Type TryCatch_6
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Framework/TakeScreenshot.xaml
+
+The workflow type is TakeScreenshot.xaml
+
+Annotation: Path to the folder where the screenshot should be saved.
+Type InArgument(x:String)
+
+Annotation: Optional argument that specifies the path and the name of the screenshot to be taken.
+Type InOutArgument(x:String)
+
+Annotation: Capture a screenshot, log its name and location and save it with the PNG extension.&#xA;If no specific filepath is passed as argument, it saves the image in the folder specified by in_Folder.
+Display Name: Take and Save Screenshot
+Type Sequence_1
+
+Annotation: {x:Null}
+Display Name: The whole screen is captured.
+Type [Screenshot]
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Tests/RunAllTests.xaml
+
+The workflow type is RunAllTests.xaml
+
+Annotation: Path to the file to which test logs are written.
+Type InArgument(x:String)
+
+Annotation: Path to the Excel file to which the result of the tests are written.
+Type InArgument(x:String)
+
+Annotation: Run all tests defined in Tests.xlsx and log their results.&#xA;All tests are invoked in the same order they are defined in the Excel file.
+Display Name: Run All Tests
+Type Sequence_2
+
+Annotation: Execute test and log its result.
+Display Name: Try catch
+Type TryCatch_2
+
+Annotation: {x:Null}
+Display Name: {x:Null}
+Type &lt;wnd app='notepad.exe' cls='Notepad' title='TestLog.txt - Notepad' /&gt;
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Tests/RunAllTests_Logging.xaml
+
+The workflow type is RunAllTests_Logging.xaml
+
+Annotation: Overall counter for tests.
+Type InArgument(x:Int32)
+
+Annotation: Counter for tests that failed.
+Type InOutArgument(x:Int32)
+
+Annotation: File to which logs about tests should be written.
+Type InArgument(x:String)
+
+Annotation: Status of the test to be written to the report.
+Type OutArgument(x:String)
+
+Annotation: Counter for tests that succeeded.
+Type InOutArgument(x:Int32)
+
+Annotation: Expected outcome of the test. It can be &quot;Success&quot;, &quot;SystemException&quot; or &quot;BusinessException&quot;.
+Type InArgument(x:String)
+
+Annotation: Filename of the workflow that implements a test.
+Type InArgument(x:String)
+
+Annotation: Exception thrown by tests and used for logging purposes.
+Type InArgument(s:Exception)
+
+Annotation: Actual outcome of the test. It can be &quot;Success&quot;, &quot;SystemException&quot; or &quot;BusinessException&quot;.
+Type InArgument(x:String)
+
+Annotation: Comment about the test to be written to the report.
+Type OutArgument(x:String)
+
+Annotation: Log the result of running the test, based on the type of test and its outcome.
+Display Name: Run All Tests - Logging
+Type Sequence_3
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Tests/TestLog.txt
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Tests/Tests.xlsx
+
+****************
+/home/runner/Uipathdoc/RoboticEnterpriseFramework_prova/Tests/TestWorkflowTemplate.xaml
+
+The workflow type is TestWorkflowTemplate.xaml
+
+Annotation: Template workflow used to create tests for workflows in the process.&#xA;Create a new test workflow by copying and renaming this file.
+Display Name: Test Template
+Type Sequence_1
+
+Annotation: scg:Dictionary(x:String, x:Object)
+Type Config
+
+****************
