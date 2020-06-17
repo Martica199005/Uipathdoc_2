@@ -115,6 +115,13 @@ listOfFiles = list()
 for (dirpath, dirnames, filenames) in os.walk(dirName):
     listOfFiles += [os.path.join(dirpath, file) for file in filenames]
     
+#Number of relevant elements in listOfFiles
+count=0
+for elem in listOfFiles:
+    if not ".git" in elem:
+      count=count+1
+print("Number of elements: "+str(count)) 
+    
     
 # Print the files 
 for elem in listOfFiles:
